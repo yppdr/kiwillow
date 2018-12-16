@@ -31,12 +31,13 @@ abstract class DAO implements CRUDInterface, RepositoryInterface{
         if(is_null(DAO::$pdo)){
             $config = json_decode(file_get_contents("./config/database.json"), true);
             DAO::$pdo = new PDO(
-                    $config['driver'] . ":"
-                    . "host=" . $config['host']
-                    . ((empty($config['port'])) ? $config['port'] : (";port=" . $config['port']) )
-                    . ";dbname=" . $config['dbname'], $config['username'], $config['password']
+                $config['driver'] . ":"
+                . "host=" . $config['host']
+                . ((empty($config['port'])) ? $config['port'] : (";port=" . $config['port']) )
+                . ";dbname=" . $config['dbname']
+                . ";charset=utf8", $config['username'], $config['password']
             );
-        }       
+        }
     }
     
     /**
